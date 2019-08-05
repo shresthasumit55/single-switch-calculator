@@ -9,8 +9,17 @@ switchButtonMode=0;
 
 $(document).ready(function() {
 	$("#"+rowOrder[currentrow]).addClass( "activeRow" );
-	intervalId = setInterval(moveRow,1000);
 
+})
+
+$("#buttonNext").click(function(){
+	if (switchButtonMode==0){
+        moveRow();
+	}
+	else if (switchButtonMode==1){
+		moveItems();
+
+	}
 })
 
 function moveRow(){
@@ -24,19 +33,15 @@ function moveRow(){
 
 $("#buttonSwitch").click(function(){
 	if (switchButtonMode==0){
-	clearInterval(intervalId);
 	currentElements = $("#"+rowOrder[currentrow]).children().toArray()		
 	$("#"+String(currentElements[currentItemIndex].id)).addClass("activeButton");
-	itemIntervalId = setInterval(moveItems,1000);
 
 	}
 	else if (switchButtonMode==1){
-		clearInterval(itemIntervalId);
 		currentItem = $("#"+String(currentElements[currentItemIndex].id));
 		currentItem.click();
-		currentItem.removeClass("activeButton");
-		currentItemIndex = 0;
-		intervalId = setInterval(moveRow,1000)
+        currentItem.removeClass("activeButton");
+        currentItemIndex=0;
 
 	}
 	switchButtonMode = 1-switchButtonMode;
